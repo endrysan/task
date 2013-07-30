@@ -4,6 +4,8 @@ package test_epam;
 public class Project {
     
     private String project;
+    //Какой нахер marker, я не понимаю что это за переменная
+    //она должна называться fixedCost
     private boolean marker = false;
     
     public Project(String project, boolean marker) {

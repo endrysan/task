@@ -7,7 +7,13 @@ public class Employee {
     private String role;
     private int fixedSalary;
     private double experience;
+
+    // Почему это переменная protected? зачем?
+    // должно быть что-то такое, List<Project> projects = new ArrayList<Project>();
+    // при это в методе setProject ты проверяешь, если это Developer очищаешь список проектов и добавляешь только один
     Project project;
+
+    // Переменная нигде не используется
     Project marker;
     
     public Employee() {
