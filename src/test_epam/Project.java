@@ -5,7 +5,7 @@ public class Project {
     
     private String project;
 
-    private boolean fixedCost = false;
+    private boolean fixedCost;
     
     public Project(String project, boolean fixedCost) {
         this.project = project;
