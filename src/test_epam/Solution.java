@@ -1,6 +1,7 @@
 package test_epam;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -42,7 +43,7 @@ public class Solution {
        List<Integer> bonus2 = new ArrayList<Integer>();
        
        for (int i = 0; i < list.size(); i++) {
-           if (list.get(i).getProject().getMarker() == false) {
+           if (list.get(i).getProject().getFixedCost() == false) {
                bonus2.add(500);
            }
            else {
@@ -61,27 +62,14 @@ public class Solution {
            cost.add(list.get(i).getFixedSalary() + bonus.get(i) + bonus2.get(i));
        }
        
-       
-       /*
-       Employee[] employ = new Employee[4];
-       
-       employ[0] = new Employee("Ivanov Ivan", "Developer", 1700, 0.5);
-       employ[1] = new Employee("Petrov Petr", "Developer", 2000, 2.0);
-       employ[2] = new Employee("Mike", "Manger", 6000, 4.0);
-       employ[3] = new Employee("Jim", "Developer", 3500, 2.0);
-       
-       int[] bonus = new int[employ.length];
-       for (int i = 0; i < employ.length; i++) {
-           if (employ[i].getExperience() > 1) {
-               bonus[i] = (int) (50 * employ[i].getExperience());
-           }
-           else {
-               bonus[i] = 0;
-           }
+       //Collections.sort(cost);
+       int min = cost.get(0);
+       for (int i = 0; i < list.size(); i++) {
+           //if (cost.get(i))
+           System.out.println(list.get(i).getEmployee() + " " + cost.get(i));
        }
        
-       for (int x: bonus) {
-           System.out.println(x);
-       }*/
+       
+      
     }
 }

@@ -1,5 +1,8 @@
 package test_epam;
 
+import java.util.List;
+import java.util.ArrayList;
+
 
 public class Employee {
     
@@ -11,10 +14,10 @@ public class Employee {
     // Почему это переменная protected? зачем?
     // должно быть что-то такое, List<Project> projects = new ArrayList<Project>();
     // при это в методе setProject ты проверяешь, если это Developer очищаешь список проектов и добавляешь только один
-    Project project;
+    List<Project> projects = new ArrayList<Project>();
 
     // Переменная нигде не используется
-    Project marker;
+    //Project marker;
     
     public Employee() {
         
@@ -44,11 +47,11 @@ public class Employee {
     }
     
     public Project getProject() {
-        return project;
+        return projects.get();
     }
     
     public void setProject(Project project) {
-        this.project = project;
+        if ()
     }
     
     public int getFixedSalary() {

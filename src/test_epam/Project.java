@@ -4,13 +4,12 @@ package test_epam;
 public class Project {
     
     private String project;
-    //Какой нахер marker, я не понимаю что это за переменная
-    //она должна называться fixedCost
-    private boolean marker = false;
+
+    private boolean fixedCost = false;
     
-    public Project(String project, boolean marker) {
+    public Project(String project, boolean fixedCost) {
         this.project = project;
-        this.marker = marker;
+        this.fixedCost = fixedCost;
     }
     
     public String getProject() {
@@ -21,12 +20,12 @@ public class Project {
         this.project = project;
     }
     
-    public boolean getMarker() {
-        return marker;
+    public boolean getFixedCost() {
+        return fixedCost;
     }
     
-    public void setMarker(boolean marker) {
-        this.marker = marker;
+    public void setFixedCost(boolean fixedCost) {
+        this.fixedCost = fixedCost;
     }
 
 }
