@@ -1,63 +1,76 @@
 package test_epam;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
-
-
+// Класс показывающий результат работы
 public class Solution {
 
     public static void main(String[] args) {
-       
-       List<Employee> listEmployee = new ArrayList<Employee>();
-       List<Project> listProject = new ArrayList<Project>();
-       
-       listProject.add(new Project("Chart Editor", true));
-       listProject.add(new Project("Employment System", false));
-       listProject.add(new Project("Bank Transaction", false));
+        // Создаем TreeMap для сортировки по зарплате
+        Map<Integer, Employee> result = new TreeMap<Integer, Employee>(new Comparator<Integer>() {
 
-       Employee employee = new Employee("Ivanov Ivan", EmployeeRole.DEVELOPER, 1700, 0.5);
-       employee.addProject(listProject.get(0));
-       listEmployee.add(employee);
+            // Нисходящая сортировка
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2.compareTo(o1);
+            }
 
-       employee = new Employee("Petrov Petr", EmployeeRole.DEVELOPER, 2000, 2.0);
-       employee.addProject(listProject.get(1));
-       listEmployee.add(employee);
+        });
+        List<Employee> employees = getEmployees();
+        // Вычисляем полный оклад
+        for (Employee employee : employees) {
+            int salary = employee.getFixedSalary();
+            int expYears = (int) employee.getExperience();
+            // Добавляем бонус за каждый полный год работы
+            if (expYears >= 1) {
+                salary += expYears * 50;
+            }
+            // Добавляем бонус за каждый проект с неограниченным бюджетом
+            for (Project project : employee.getProjects()) {
+                if (!project.isFixedCost()) {
+                    salary += 500;
+                }
+            }
+            result.put(Integer.valueOf(salary), employee);
+        }
 
-       employee = new Employee("Mike", EmployeeRole.MANAGER, 6000, 4.0);
-       employee.addProject(listProject.get(0));
-       employee.addProject(listProject.get(1));
-       employee.addProject(listProject.get(2));
-       listEmployee.add(employee);
+        // Выводим результат на экран
+        for (Entry<Integer, Employee> resultEntry : result.entrySet()) {
+            System.out.println(resultEntry.getValue().getEmployee() + "\t" + resultEntry.getKey());
+        }
+    }
 
-       employee = new Employee("Jim", EmployeeRole.DEVELOPER, 3500, 2.0);
-       employee.addProject(listProject.get(0));
-       listEmployee.add(employee);
-       
-       List<Integer> cost = new ArrayList<Integer>();
-       
-       for (int i = 0; i < listEmployee.size(); i++) {
-           int year = (int) listEmployee.get(i).getExperience();
-           if (year > 1) {
-               cost.add(50 * year + listEmployee.get(i).getFixedSalary());
-           }
-           else {
-               cost.add(listEmployee.get(i).getFixedSalary());
-           }
-       }
-       
-       for (int i = 0; i < listEmployee.size(); i++) {
-           for (int j = 0; j < listProject.size(); j++) {
-               if (listProject.get(j).getFixedCost() == false) {
-                   cost.set(j, cost.get(j) + 500);
-               }
-              
-           }
-       }
-        
-       for (Integer x: cost) {
-           System.out.println(x);
-       }
+    // Возвращает список всех сотрудников
+    private static List<Employee> getEmployees() {
+        List<Employee> employees = new ArrayList<Employee>();
+        List<Project> listProject = new ArrayList<Project>();
 
+        listProject.add(new Project("Chart Editor", true));
+        listProject.add(new Project("Employment System", false));
+        listProject.add(new Project("Bank Transaction", false));
+
+        Employee employee = new Employee("Ivanov Ivan", EmployeeRole.DEVELOPER, 1700, 0.5);
+        employee.addProject(listProject.get(0));
+        employees.add(employee);
+
+        employee = new Employee("Petrov Petr", EmployeeRole.DEVELOPER, 2000, 2.0);
+        employee.addProject(listProject.get(1));
+        employees.add(employee);
+
+        employee = new Employee("Mike", EmployeeRole.MANAGER, 6000, 4.0);
+        employee.addProject(listProject.get(0));
+        employee.addProject(listProject.get(1));
+        employee.addProject(listProject.get(2));
+        employees.add(employee);
+
+        employee = new Employee("Jim", EmployeeRole.DEVELOPER, 3500, 2.0);
+        employee.addProject(listProject.get(0));
+        employees.add(employee);
+        return employees; 
     }
 }
