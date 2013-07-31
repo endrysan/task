@@ -4,7 +4,6 @@ package test_epam;
 public class Project {
     
     private String project;
-
     private boolean fixedCost;
     
     public Project(String project, boolean fixedCost) {
